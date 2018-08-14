@@ -28,6 +28,8 @@ class IPS_PiHole extends IPSModule
 
         if ($this->ReadPropertyString("Host") != '') {
             $this->SetTimerInterval('Pih_updateStatus', $this->ReadPropertyInteger('UpdateTimerInterval') * 1000);
+        } else {
+            $this->SetTimerInterval('Pih_updateStatus', 0);
         }
         $this->EnableAction('PihStatus');
 
