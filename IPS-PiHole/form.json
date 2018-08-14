@@ -1,0 +1,24 @@
+{
+    "elements":
+    [
+      { "type": "Label",
+        "label": "TV Headend Settings"
+      },
+      { "type": "ValidationTextBox",
+        "name": "PihIP",
+        "caption": "IP Adresse des Pi-holes"
+      },
+      { "type": "NumberSpinner",
+        "name": "PihPort",
+        "caption": "Port des Pi-hole Webinterfaces"
+      },
+      { "type": "ValidationTextBox",
+        "name": "PihToken",
+        "caption": "API Token des Pi-holes"
+      },
+      { "type": "IntervalBox",
+        "name": "UpdateTimerInterval",
+        "caption": "Seconds"
+      }
+    ]
+}
