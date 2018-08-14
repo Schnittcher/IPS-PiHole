@@ -8,8 +8,8 @@ class IPS_PiHole extends IPSModule
         //Never delete this line!
         parent::Create();
         //Connect to Websocket Client
-        $this->RegisterPropertyString('PihIP', '');
-        $this->RegisterPropertyInteger('PihPort', 80);
+        $this->RegisterPropertyString('Host', '');
+        $this->RegisterPropertyInteger('Port', 80);
         $this->RegisterPropertyString('PihToken', '');
         $this->RegisterPropertyInteger('UpdateTimerInterval', 20);
 
@@ -26,7 +26,9 @@ class IPS_PiHole extends IPSModule
         //Never delete this line!
         parent::ApplyChanges();
 
-        $this->SetTimerInterval('Pih_updateStatus', $this->ReadPropertyInteger('UpdateTimerInterval') * 1000);
+        if ($this->ReadPropertyString("Host") != '') {
+            $this->SetTimerInterval('Pih_updateStatus', $this->ReadPropertyInteger('UpdateTimerInterval') * 1000);
+        }
         $this->EnableAction('PihStatus');
 
     }
@@ -40,11 +42,11 @@ class IPS_PiHole extends IPSModule
     private function request($parm)
     {
 
-        $url = "http://" . $this->ReadPropertyString("PihIP") . ":" . $this->ReadPropertyInteger("PihPort") . "/admin/api.php?" . $parm . "&auth=" . $this->ReadPropertyString("PihToken");
+        $url = "http://" . $this->ReadPropertyString("Host") . ":" . $this->ReadPropertyInteger("Port") . "/admin/api.php?" . $parm . "&auth=" . $this->ReadPropertyString("PihToken");
         $this->SendDebug(__FUNCTION__." URL",$url,0);
-        $json = file_get_contents($url);
+        $json = @file_get_contents($url);
         if ($json === FALSE) {
-            //throw new Exception("Cannot access '$url' to read contents.");
+            $this->SendDebug(__FUNCTION__." Error",'Cannot access to API',0);
         } else {
             $this->SendDebug(__FUNCTION__." JSON",$json,0);
             $data = json_decode($json, TRUE);
