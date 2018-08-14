@@ -48,7 +48,7 @@ class IPS_PiHole extends IPSModule
         $this->SendDebug(__FUNCTION__." URL",$url,0);
         $json = @file_get_contents($url);
         if ($json === FALSE) {
-            $this->SendDebug(__FUNCTION__." Error",'Cannot access to API',0);
+            echo 'Cannot access to API / Pi-hole offline?';
         } else {
             $this->SendDebug(__FUNCTION__." JSON",$json,0);
             $data = json_decode($json, TRUE);
