@@ -1,3 +1,8 @@
+<a href="https://www.symcon.de"><img src="https://img.shields.io/badge/IP--Symcon-4.0-blue.svg?style=flat-square"/></a>
+<a href="https://www.symcon.de"><img src="https://img.shields.io/badge/IP--Symcon-5.0-blue.svg?style=flat-square"/></a>
+<a href="https://styleci.io/repos/112193317"><img src="https://styleci.io/repos/144764045/shield?branch=master" alt="StyleCI"></a>
+<br />
+
 # IPS-PiHole
 Mit diesem Modul ist es möglich, Pi-hole zu überwachen und steuern.
 
@@ -20,7 +25,7 @@ Github Repository in IP-Symcon über **Kerninstanzen -> Modules -> Hinzufügen**
 
 ### Einrichtung der Instanzen
 
-#### IPS-PiHole``
+#### IPS-PiHole
 Die Pi-hole Instanz wird im Objektbaum erzeugt.
 
 Feld | Erklärung
