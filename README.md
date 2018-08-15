@@ -11,6 +11,7 @@ Mit diesem Modul ist es möglich, Pi-hole zu überwachen und steuern.
 
 1. [Funktionsumfang](#1-funktionsumfang)  
 2. [Installation](#2-installation) 
+3. [Spenden](#3-spenden)
 
 ## 1. Funktionsumfang
 * Aktvieiren und Deaktiveiren des Dienstes
@@ -34,3 +35,9 @@ IP-Adresse des Pi-holes | Hier die IP-Adresse des Pi-hole Servers eintragen
 Port des Pi-hole Webinterfaces | Hier wird der Port vom Webinterface angegeben, Default ist 80
 API Token des Pi-holes | Im Webinterface unter Settings -> API / Web interface zu finden
 IntervalBox | Hier kann de Zeit eingestellt werden, wie oft das Modul die Daten vom Pi-hole abfragt.
+
+## 3. Spenden
+
+Dieses Modul ist für die nicht kommzerielle Nutzung kostenlos, freiweillige Unterstützungen für den Autor werden hier akzeptiert:  
+
+<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WTZ5B64F6FV38" target="_blank"><img src="https://www.paypalobjects.com/de_DE/DE/i/btn/btn_donate_LG.gif" border="0" /></a>
