@@ -11,10 +11,16 @@ class IPS_PiHole extends IPSModule
         $this->RegisterPropertyString('PihToken', '');
         $this->RegisterPropertyInteger('UpdateTimerInterval', 20);
 
-        $this->RegisterVariableBoolean('PihStatus', 'Status', '~Switch', 1);
-        $this->RegisterVariableInteger('PihBlockedDomains', 'Blocked Domains', '', 2);
-        $this->RegisterVariableInteger('PihDNSQueriesToday', 'DNS Queries Today', '', 3);
-        $this->RegisterVariableInteger('PihAdsBlockedToday', 'Ads Blocked Today', '', 4);
+        $this->RegisterVariableBoolean('PihStatus', $this->Translate('Status'), '~Switch', 1);
+        $this->RegisterVariableInteger('PihBlockedDomains', $this->Translate('Blocked Domains'), '', 2);
+        $this->RegisterVariableInteger('PihDNSQueriesToday', $this->Translate('DNS Queries Today'), '', 3);
+        $this->RegisterVariableInteger('PihAdsBlockedToday', $this->Translate('Ads Blocked Today'), '', 4);
+
+		if (!IPS_VariableProfileExists('PiHole.Percent')) {
+			IPS_CreateVariableProfile('PiHole.Percent', 1);
+			IPS_SetVariableProfileText('PiHole.Percent', '', ' %');
+		}
+        $this->RegisterVariableInteger('PihAdsPrecentageToday', $this->Translate('Ads Percentage Today'), 'PiHole.Percent', 5);
 
         $this->RegisterTimer('Pih_updateStatus', 0, 'Pih_updateStatus($_IPS[\'TARGET\']);');
     }
@@ -87,6 +93,7 @@ class IPS_PiHole extends IPSModule
             SetValue($this->GetIDForIdent('PihBlockedDomains'), $data['domains_being_blocked']);
             SetValue($this->GetIDForIdent('PihDNSQueriesToday'), $data['dns_queries_today']);
             SetValue($this->GetIDForIdent('PihAdsBlockedToday'), $data['ads_blocked_today']);
+            SetValue($this->GetIDForIdent('PihAdsPrecentageToday'), $data['ads_percentage_today']);
         }
     }
 

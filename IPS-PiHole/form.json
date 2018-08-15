@@ -20,5 +20,10 @@
         "name": "UpdateTimerInterval",
         "caption": "Seconds"
       }
+    ],
+	"actions":
+    [
+		{ "type": "Button", "label": "Update data", "onClick": "Pih_updateStatus($id);" }
     ]
+
 }
