@@ -40,13 +40,13 @@ class IPS_PiHole extends IPSModule
 
     private function request(string $parm)
     {
-        $url = 'http://'.$this->ReadPropertyString('Host').':'.$this->ReadPropertyInteger('Port').'/admin/api.php?'.$parm.'&auth='.$this->ReadPropertyString('PihToken');
-        $this->SendDebug(__FUNCTION__.' URL', $url, 0);
+        $url = 'http://' . $this->ReadPropertyString('Host') . ':' . $this->ReadPropertyInteger('Port') . '/admin/api.php?' . $parm . '&auth=' . $this->ReadPropertyString('PihToken');
+        $this->SendDebug(__FUNCTION__ . ' URL', $url, 0);
         $json = @file_get_contents($url);
         if ($json === false) {
             echo 'Cannot access to API / Pi-hole offline?';
         } else {
-            $this->SendDebug(__FUNCTION__.' JSON', $json, 0);
+            $this->SendDebug(__FUNCTION__ . ' JSON', $json, 0);
             $data = json_decode($json, true);
 
             return $data;
