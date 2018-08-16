@@ -1,0 +1,18 @@
+{
+    "translations": {
+        "de": {
+			"Pi-hole Settings": "Pi-hole Einstellungen",
+
+			"Interval": "Intervall",
+			"Seconds": "Sekunden",
+
+			"Update data": "Daten aktualisieren",
+
+			"Status": "Status",
+			"Blocked Domains": "gesperrte Domains",
+			"DNS Queries Today": "heutige DNS-Abfragen",
+			"Ads Blocked Today": "heute gesperrte Werbeseiten",
+			"Ads Percentage Today": "prozentualer Anteil heute gesperrter Seiten"
+		}
+    }
+}
