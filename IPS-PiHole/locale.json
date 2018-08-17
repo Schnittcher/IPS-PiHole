@@ -12,7 +12,10 @@
 			"Blocked Domains": "gesperrte Domains",
 			"DNS Queries Today": "heutige DNS-Abfragen",
 			"Ads Blocked Today": "heute gesperrte Werbeseiten",
-			"Ads Percentage Today": "prozentualer Anteil heute gesperrter Seiten"
+			"Ads Percentage Today": "prozentualer Anteil heute gesperrter Seiten",
+			"Queries Cached": "Abfragen zwischengespeichert",
+			"DNS Queries All Types": "Gesamte DNS Abfragen",
+			"Gravity Last Updated": "Gravity zuletzt aktualisiert"
 		}
     }
 }

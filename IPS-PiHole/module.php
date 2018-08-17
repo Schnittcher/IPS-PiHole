@@ -15,6 +15,9 @@ class IPS_PiHole extends IPSModule
         $this->RegisterVariableInteger('PihBlockedDomains', $this->Translate('Blocked Domains'), '', 2);
         $this->RegisterVariableInteger('PihDNSQueriesToday', $this->Translate('DNS Queries Today'), '', 3);
         $this->RegisterVariableInteger('PihAdsBlockedToday', $this->Translate('Ads Blocked Today'), '', 4);
+        $this->RegisterVariableInteger('PihQueriesCached', $this->Translate('Queries Cached'), '', 6);
+        $this->RegisterVariableInteger('PihDNSQueriesAllTypes', $this->Translate('DNS Queries All Types'), '', 7);
+        $this->RegisterVariableInteger('PihGravityLastUpdated', $this->Translate('Gravity Last Updated'), '~UnixTimestamp', 8);
 
         if (!IPS_VariableProfileExists('PiHole.Percent')) {
             IPS_CreateVariableProfile('PiHole.Percent', 1);
@@ -94,6 +97,9 @@ class IPS_PiHole extends IPSModule
             SetValue($this->GetIDForIdent('PihDNSQueriesToday'), $data['dns_queries_today']);
             SetValue($this->GetIDForIdent('PihAdsBlockedToday'), $data['ads_blocked_today']);
             SetValue($this->GetIDForIdent('PihAdsPrecentageToday'), $data['ads_percentage_today']);
+            SetValue($this->GetIDForIdent('PihQueriesCached'), $data['queries_cached']);
+            SetValue($this->GetIDForIdent('PihDNSQueriesAllTypes'), $data['dns_queries_all_types']);
+            SetValue($this->GetIDForIdent('PihGravityLastUpdated'), $data['gravity_last_updated']['absolute']);
         }
     }
 
