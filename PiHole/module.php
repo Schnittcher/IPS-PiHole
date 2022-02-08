@@ -1,6 +1,8 @@
 <?php
 
-class IPS_PiHole extends IPSModule
+declare(strict_types=1);
+
+class PiHole extends IPSModule
 {
     public function Create()
     {
@@ -43,8 +45,46 @@ class IPS_PiHole extends IPSModule
 
     public function updateStatus()
     {
-        $this->getStatus();
         $this->getSummaryRaw();
+    }
+
+    public function setActive(bool $value)
+    {
+        $data = $this->request(($value ? 'enable' : 'disable'));
+        if ($data != null) {
+            switch ($data['status']) {
+                case 'enabled':
+                    $this->SetValue('PihStatus', true);
+                    break;
+                case 'disabled':
+                    $this->SetValue('PihStatus', false);
+                    break;
+            }
+        }
+    }
+
+    public function getSummaryRaw()
+    {
+        $data = $this->request('summaryRaw');
+        if ($data != null) {
+            $this->SetValue('PihBlockedDomains', $data['domains_being_blocked']);
+            $this->SetValue('PihDNSQueriesToday', $data['dns_queries_today']);
+            $this->SetValue('PihAdsBlockedToday', $data['ads_blocked_today']);
+            $this->SetValue('PihAdsPrecentageToday', $data['ads_percentage_today']);
+            $this->SetValue('PihQueriesCached', $data['queries_cached']);
+            $this->SetValue('PihDNSQueriesAllTypes', $data['dns_queries_all_types']);
+            $this->SetValue('PihGravityLastUpdated', $data['gravity_last_updated']['absolute']);
+            $this->SetValue('PihStatus', $data['status']);
+        }
+    }
+
+    public function RequestAction($Ident, $Value)
+    {
+        switch ($Ident) {
+            case 'PihStatus':
+                $this->setActive($Value);
+                break;
+        }
     }
 
     private function request(string $parm)
@@ -59,56 +99,6 @@ class IPS_PiHole extends IPSModule
             $data = json_decode($json, true);
 
             return $data;
-        }
-    }
-
-    public function getStatus()
-    {
-        $data = $this->request('status');
-        if ($data != null) {
-            if ($data['status'] == 'enabled') {
-                SetValue($this->GetIDForIdent('PihStatus'), true);
-            } else {
-                SetValue($this->GetIDForIdent('PihStatus'), false);
-            }
-        }
-    }
-
-    public function setActive(bool $value)
-    {
-        $data = $this->request(($value ? 'enable' : 'disable'));
-        if ($data != null) {
-            switch ($data['status']) {
-                case 'enabled':
-                    SetValue(IPS_GetObjectIDByIdent('PihStatus', $this->InstanceID), true);
-                    break;
-                case 'disabled':
-                    SetValue(IPS_GetObjectIDByIdent('PihStatus', $this->InstanceID), false);
-                    break;
-            }
-        }
-    }
-
-    public function getSummaryRaw()
-    {
-        $data = $this->request('summaryRaw');
-        if ($data != null) {
-            SetValue($this->GetIDForIdent('PihBlockedDomains'), $data['domains_being_blocked']);
-            SetValue($this->GetIDForIdent('PihDNSQueriesToday'), $data['dns_queries_today']);
-            SetValue($this->GetIDForIdent('PihAdsBlockedToday'), $data['ads_blocked_today']);
-            SetValue($this->GetIDForIdent('PihAdsPrecentageToday'), $data['ads_percentage_today']);
-            SetValue($this->GetIDForIdent('PihQueriesCached'), $data['queries_cached']);
-            SetValue($this->GetIDForIdent('PihDNSQueriesAllTypes'), $data['dns_queries_all_types']);
-            SetValue($this->GetIDForIdent('PihGravityLastUpdated'), $data['gravity_last_updated']['absolute']);
-        }
-    }
-
-    public function RequestAction($Ident, $Value)
-    {
-        switch ($Ident) {
-            case 'PihStatus':
-                $this->setActive($Value);
-                break;
         }
     }
 }
