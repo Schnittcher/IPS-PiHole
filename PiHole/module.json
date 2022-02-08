@@ -1,6 +1,6 @@
 {
 	"id": "{6949DA77-4D74-4B95-A9CD-D7CF28FFDE51}",
-	"name": "IPS_PiHole",
+	"name": "PiHole",
 	"type": 3,
 	"vendor": "",
 	"aliases": ["Pi-hole"],
