@@ -74,7 +74,11 @@ class PiHole extends IPSModule
             $this->SetValue('PihQueriesCached', $data['queries_cached']);
             $this->SetValue('PihDNSQueriesAllTypes', $data['dns_queries_all_types']);
             $this->SetValue('PihGravityLastUpdated', $data['gravity_last_updated']['absolute']);
-            $this->SetValue('PihStatus', $data['status']);
+            if ($data['status'] == 'enabled') {
+                $this->SetValue('PihStatus', true);
+            } else {
+                $this->SetValue('PihStatus', false);
+            }
         }
     }
 
