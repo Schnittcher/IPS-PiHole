@@ -14,7 +14,9 @@ class PiHole extends IPSModule
         $this->RegisterPropertyInteger('UpdateTimerInterval', 20);
 
         $this->RegisterVariableBoolean('PihStatus', $this->Translate('Status'), '~Switch', 1);
+        $this->EnableAction('PihStatus');
         $this->RegisterVariableInteger('PihDisableTime', $this->Translate('Time to disable'), '', 2);
+        $this->EnableAction('PihDisableTime');
         $this->RegisterVariableInteger('PihBlockedDomains', $this->Translate('Blocked Domains'), '', 3);
         $this->RegisterVariableInteger('PihDNSQueriesToday', $this->Translate('DNS Queries Today'), '', 4);
         $this->RegisterVariableInteger('PihAdsBlockedToday', $this->Translate('Ads Blocked Today'), '', 5);
@@ -41,7 +43,6 @@ class PiHole extends IPSModule
         } else {
             $this->SetTimerInterval('Pih_updateStatus', 0);
         }
-        $this->EnableAction('PihStatus');
     }
 
     public function updateStatus()
