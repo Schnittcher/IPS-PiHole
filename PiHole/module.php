@@ -14,9 +14,10 @@ class PiHole extends IPSModule
         $this->RegisterPropertyInteger('UpdateTimerInterval', 20);
 
         $this->RegisterVariableBoolean('PihStatus', $this->Translate('Status'), '~Switch', 1);
-        $this->RegisterVariableInteger('PihBlockedDomains', $this->Translate('Blocked Domains'), '', 2);
-        $this->RegisterVariableInteger('PihDNSQueriesToday', $this->Translate('DNS Queries Today'), '', 3);
-        $this->RegisterVariableInteger('PihAdsBlockedToday', $this->Translate('Ads Blocked Today'), '', 4);
+        $this->RegisterVariableInteger('PihDisableTime', $this->Translate('Time to disable'), '', 2);
+        $this->RegisterVariableInteger('PihBlockedDomains', $this->Translate('Blocked Domains'), '', 3);
+        $this->RegisterVariableInteger('PihDNSQueriesToday', $this->Translate('DNS Queries Today'), '', 4);
+        $this->RegisterVariableInteger('PihAdsBlockedToday', $this->Translate('Ads Blocked Today'), '', 5);
         $this->RegisterVariableInteger('PihQueriesCached', $this->Translate('Queries Cached'), '', 6);
         $this->RegisterVariableInteger('PihDNSQueriesAllTypes', $this->Translate('DNS Queries All Types'), '', 7);
         $this->RegisterVariableInteger('PihGravityLastUpdated', $this->Translate('Gravity Last Updated'), '~UnixTimestamp', 8);
@@ -50,7 +51,7 @@ class PiHole extends IPSModule
 
     public function setActive(bool $value)
     {
-        $data = $this->request(($value ? 'enable' : 'disable'));
+        $data = $this->request(($value ? 'enable' : 'disable=' . $this->GetValue('PihDisableTime')));
         if ($data != null) {
             switch ($data['status']) {
                 case 'enabled':
@@ -87,6 +88,9 @@ class PiHole extends IPSModule
         switch ($Ident) {
             case 'PihStatus':
                 $this->setActive($Value);
+                break;
+            case 'PihDisableTime':
+                $this->SetValue($Ident, $Value);
                 break;
         }
     }
