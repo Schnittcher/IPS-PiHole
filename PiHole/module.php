@@ -10,6 +10,7 @@ class PiHole extends IPSModule
         parent::Create();
         $this->RegisterPropertyString('Host', '');
         $this->RegisterPropertyInteger('Port', 80);
+        $this->RegisterPropertyBoolean('SSL', false);
         $this->RegisterPropertyString('PihToken', '');
         $this->RegisterPropertyInteger('UpdateTimerInterval', 20);
 
@@ -98,7 +99,7 @@ class PiHole extends IPSModule
 
     private function request(string $parm)
     {
-        $url = 'http://' . $this->ReadPropertyString('Host') . ':' . $this->ReadPropertyInteger('Port') . '/admin/api.php?' . $parm . '&auth=' . $this->ReadPropertyString('PihToken');
+        $url = ($this->ReadPropertyBoolean('SSL') ? 'https://' : 'http://') . $this->ReadPropertyString('Host') . ':' . $this->ReadPropertyInteger('Port') . '/admin/api.php?' . $parm . '&auth=' . $this->ReadPropertyString('PihToken');
         $this->SendDebug(__FUNCTION__ . ' URL', $url, 0);
         $json = @file_get_contents($url);
         if ($json === false) {
