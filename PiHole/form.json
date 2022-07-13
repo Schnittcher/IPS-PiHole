@@ -7,12 +7,17 @@
         {
             "type": "ValidationTextBox",
             "name": "Host",
-            "caption": "IP Adresse des Pi-holes"
+            "caption": "Adresse des Pi-holes"
         },
         {
             "type": "NumberSpinner",
             "name": "Port",
             "caption": "Port des Pi-hole Webinterfaces"
+        },
+        {
+            "type": "CheckBox",
+            "name": "SSL",
+            "caption": "HTTPS benutzen"
         },
         {
             "type": "ValidationTextBox",
